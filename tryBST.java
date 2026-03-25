@@ -84,5 +84,45 @@ class BST {
         while (node.left != null) node = node.left;
         return node.data;
     }
+    // Build balanced BST from sorted array
+    public void buildBalanced(int[] arr) {
+        root = buildBalancedRec(arr, 0, arr.length - 1);
+    }
+
+    private tNode buildBalancedRec(int[] arr, int start, int end) {
+        if (start > end) return null;
+        int mid = (start + end) / 2;
+        tNode node = new tNode(arr[mid]);
+        node.left = buildBalancedRec(arr, start, mid - 1);
+        node.right = buildBalancedRec(arr, mid + 1, end);
+        return node;
+    }
+
+    // Delete all even nodes safely
+    public void deleteEvens() {
+        root = deleteEvensRec(root);
+    }
+
+    private tNode deleteEvensRec(tNode node) {
+        if (node == null) return null;
+
+        // Recursively delete evens in children first
+        node.left = deleteEvensRec(node.left);
+        node.right = deleteEvensRec(node.right);
+
+        // If current node is even, delete it safely
+        if (node.data % 2 == 0) {
+            if (node.left == null) return node.right;
+            else if (node.right == null) return node.left;
+
+            // Node with two children: replace with inorder successor
+            node.data = minValue(node.right);
+            node.right = deleteRec(node.right, node.data);
+        }
+
+        return node;
+    }
+}
+
 
 
