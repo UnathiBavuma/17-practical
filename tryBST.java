@@ -153,6 +153,22 @@ public class tryBST {
 
             for (int rep = 0; rep < repetitions; rep++) {
                 BST tree = new BST();
+                  // Time population
+                long start = System.currentTimeMillis();
+                tree.buildBalanced(numbers);
+                long end = System.currentTimeMillis();
+                populateTimes[rep] = end - start;
+
+                // Verify BST
+                if (!tree.isBST()) System.out.println("Tree is NOT BST!");
+
+                // Time deleting evens
+                start = System.currentTimeMillis();
+                tree.deleteEvens();
+                end = System.currentTimeMillis();
+                deleteTimes[rep] = end - start;
+            }
+
 
 
 
