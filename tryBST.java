@@ -123,6 +123,37 @@ class BST {
         return node;
     }
 }
+public class tryBST {
+
+    // Compute average
+    private static double average(long[] arr) {
+        double sum = 0;
+        for (long v : arr) sum += v;
+        return sum / arr.length;
+    }
+
+    // Compute standard deviation
+    private static double stdDev(long[] arr, double mean) {
+        double sum = 0;
+        for (long v : arr) sum += (v - mean) * (v - mean);
+        return Math.sqrt(sum / arr.length);
+    }
+
+    public static void main(String[] args) {
+        int[] testNs = {7, 20};  // Test first with 7, then final run with 20
+        int repetitions = 30;
+
+        for (int n : testNs) {
+            int numKeys = 2 * n - 1;
+            int[] numbers = new int[numKeys];
+            for (int i = 0; i < numKeys; i++) numbers[i] = i + 1;
+
+            long[] populateTimes = new long[repetitions];
+            long[] deleteTimes = new long[repetitions];
+
+            for (int rep = 0; rep < repetitions; rep++) {
+                BST tree = new BST();
+
 
 
 
